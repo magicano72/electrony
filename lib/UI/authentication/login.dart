@@ -5,7 +5,8 @@ import 'package:Electrony/Helper/image_constant.dart';
 import 'package:Electrony/Helper/validation.dart';
 import 'package:Electrony/Theming/colors.dart';
 import 'package:Electrony/Theming/style.dart';
-import 'package:Electrony/UI/auth/register.dart';
+import 'package:Electrony/UI/authentication/forget_password.dart';
+import 'package:Electrony/UI/authentication/register.dart';
 import 'package:Electrony/UI/dashboard.dart';
 import 'package:Electrony/bloc/Auth/auth_blok.dart';
 import 'package:Electrony/bloc/Auth/auth_event.dart';
@@ -160,7 +161,15 @@ class _LoginState extends State<Login> {
                                     ],
                                   ),
                                   TextButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          PageTransition(
+                                            type: PageTransitionType.fade,
+                                            child: ForgetPassword(),
+                                          ),
+                                        );
+                                      },
                                       child: Text(
                                         "Forgot Password ?",
                                         style: Style.forget,

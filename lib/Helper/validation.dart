@@ -37,10 +37,10 @@ String? validatePhoneNumber(String? value) {
     return 'Please enter a phone number';
   }
 
-  final phoneRegExp = RegExp(r'^(?:\+201|01|00201)[0-2,5][0-9]{8}$');
+  final phoneRegExp = RegExp(r'^\+20[1-9][0-9]{9}$');
 
   if (!phoneRegExp.hasMatch(value)) {
-    return 'Please enter a valid phone number';
+    return 'Enter a valid phone number starting with +20';
   }
 
   return null;

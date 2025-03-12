@@ -16,6 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final TextEditingController first_name = TextEditingController();
   final TextEditingController last_name = TextEditingController();
   final TextEditingController birthDate = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
   AuthBloc({
     required this.apiService,
   }) : super(UserInitial()) {

@@ -40,4 +40,10 @@ class Style {
       color: Color(0xff1D61E7), fontSize: 18.sp, fontWeight: FontWeight.bold);
   static final TextStyle forget =
       TextStyle(fontSize: 16.sp, color: Color(0xff1D61E7));
+  static final TextStyle getOtp = GoogleFonts.getFont('Montserrat',
+      color: Color(0xffB9B9B9), fontSize: 16.sp, fontWeight: FontWeight.bold);
+  static final TextStyle getOtpDetail = GoogleFonts.getFont('Montserrat',
+      color: Color(0xff3A3A3A), fontSize: 18.sp, fontWeight: FontWeight.bold);
+  static final TextStyle resendOtp = GoogleFonts.getFont('Montserrat',
+      color: Color(0xff2743FD), fontSize: 18.sp, fontWeight: FontWeight.bold);
 }

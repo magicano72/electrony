@@ -2,6 +2,7 @@ import 'package:Electrony/Custom/button.dart';
 import 'package:Electrony/Helper/validation.dart';
 import 'package:Electrony/Theming/colors.dart';
 import 'package:Electrony/Theming/style.dart';
+import 'package:Electrony/UI/authentication/otp_verification.dart';
 import 'package:Electrony/bloc/Auth/auth_blok.dart';
 import 'package:Electrony/bloc/Auth/auth_state.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
-class OTPVerificationScreen extends StatelessWidget {
-  OTPVerificationScreen({
+class ForgetPassword extends StatelessWidget {
+  ForgetPassword({
     super.key,
   });
   final _formKey = GlobalKey<FormState>();
@@ -93,14 +94,15 @@ class OTPVerificationScreen extends StatelessWidget {
                         Text('Enter Mobile Number', style: Style.getOtp),
                         SizedBox(height: 20.h),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 40.w),
+                          padding: EdgeInsets.symmetric(horizontal: 50.w),
                           child: TextFormField(
+                            controller:
+                                context.read<AuthBloc>().phoneController,
                             validator: validatePhoneNumber,
                             decoration: InputDecoration(
                               labelText: 'Phone Number',
                               labelStyle: TextStyle(
-                                  color: PrimaryColors.mainColor,
-                                  fontSize: 16.sp),
+                                  color: Colors.black, fontSize: 16.sp),
                               border: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: PrimaryColors.mainColor),
@@ -118,11 +120,17 @@ class OTPVerificationScreen extends StatelessWidget {
                             width: 220.w,
                             height: 55.h,
                             child: CustomButton(
-                                text: 'Get Otp',
+                                text: 'Get OTP',
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    // Handle OTP request logic here
-                                    print('Get OTP button pressed');
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                OtpVerification(
+                                                    phoneNumber: context
+                                                        .read<AuthBloc>()
+                                                        .phoneController
+                                                        .text)));
                                   }
                                 })),
                       ],

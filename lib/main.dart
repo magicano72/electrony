@@ -1,7 +1,6 @@
 import 'package:Electrony/Networking/api_services.dart';
-import 'package:Electrony/UI/auth/login.dart';
-import 'package:Electrony/UI/auth/otp_verification_screen.dart';
-import 'package:Electrony/UI/auth/register.dart';
+import 'package:Electrony/UI/authentication/login.dart';
+import 'package:Electrony/UI/authentication/register.dart';
 import 'package:Electrony/UI/dashboard.dart';
 import 'package:Electrony/bloc/Auth/auth_blok.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -65,7 +64,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         splitScreenMode: true,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: OTPVerificationScreen(),
+          home: RegisterScreen(),
           routes: {
             '/login': (context) => Login(),
             '/register': (context) => RegisterScreen(),

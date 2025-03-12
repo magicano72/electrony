@@ -1,3 +1,4 @@
+import 'package:Electrony/Theming/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -45,12 +46,13 @@ class _CustomNameFormState extends State<CustomNameForm> {
         focusNode: _focusNode,
         controller: widget.controller,
         decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: PrimaryColors.gray500),
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: _isFocused ? Colors.black12 : Color(0xffEDF1F3),
-              width: 1.0,
-            ),
+            borderSide: BorderSide(color: PrimaryColors.gray500),
           ),
           filled: true,
           fillColor: Colors.white,

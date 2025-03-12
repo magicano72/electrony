@@ -5,7 +5,6 @@ import 'package:Electrony/Custom/snacbar.dart';
 import 'package:Electrony/Helper/image_to_pdf.dart'; // Add this import
 import 'package:Electrony/Helper/important_fun.dart';
 import 'package:Electrony/Helper/pdf_creator.dart';
-import 'package:Electrony/Networking/api_services.dart';
 import 'package:Electrony/Theming/colors.dart';
 import 'package:Electrony/UI/pdf_viewer/my_docs_pdfviewer.dart';
 import 'package:Electrony/models/sign_model.dart';
@@ -18,7 +17,6 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 class MyDocs extends StatefulWidget {
   MyDocs({
@@ -543,23 +541,6 @@ class _MyDocsState extends State<MyDocs> {
         );
       },
     );
-  }
-
-  Future<void> _saveSignedPdf(
-      PdfDocument document, String originalFileName) async {
-    Directory tempDir = await getTemporaryDirectory();
-    _signedPdfFile = File('${tempDir.path}/${originalFileName}');
-    await _signedPdfFile!.writeAsBytes(await document.save());
-    document.dispose();
-    print("Signed document saved at: ${_signedPdfFile!.path}");
-    final authApiService =
-        AuthApiService(baseUrl: 'http://139.59.134.100:8055');
-    List<File> documentFiles = [_signedPdfFile!];
-
-    final documentFileIds =
-        await authApiService.uploadSignedDocuments(documentFiles);
-    await authApiService.saveSignedDocumentRecords(
-        documentFileIds, originalFileName);
   }
 
   @override

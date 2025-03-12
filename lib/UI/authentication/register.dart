@@ -1,3 +1,4 @@
+import 'package:Electrony/Custom/button.dart';
 import 'package:Electrony/Custom/name_form.dart';
 import 'package:Electrony/Custom/snacbar.dart';
 import 'package:Electrony/Custom/text_form.dart';
@@ -5,8 +6,8 @@ import 'package:Electrony/Helper/image_constant.dart';
 import 'package:Electrony/Helper/validation.dart';
 import 'package:Electrony/Theming/colors.dart';
 import 'package:Electrony/Theming/style.dart';
-import 'package:Electrony/UI/auth/login.dart';
-import 'package:Electrony/UI/dashboard.dart';
+import 'package:Electrony/UI/authentication/login.dart';
+import 'package:Electrony/UI/authentication/otp_verification.dart';
 import 'package:Electrony/bloc/Auth/auth_blok.dart';
 import 'package:Electrony/bloc/Auth/auth_event.dart';
 import 'package:Electrony/bloc/Auth/auth_state.dart';
@@ -105,7 +106,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           context,
                           PageTransition(
                             type: PageTransitionType.fade,
-                            child: DashboardScreen(),
+                            child: OtpVerification(
+                                phoneNumber: context
+                                    .read<AuthBloc>()
+                                    .phoneController
+                                    .text),
                           ),
                         );
                       } else if (state is SignUpFailure) {
@@ -173,6 +178,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 validitor: validatePhoneNumber,
                                 secure: false,
                                 fixed: false,
+                                onTap: () {
+                                  if (context
+                                      .read<AuthBloc>()
+                                      .phoneController
+                                      .text
+                                      .isEmpty) {
+                                    context
+                                        .read<AuthBloc>()
+                                        .phoneController
+                                        .text = "+20";
+                                  }
+                                },
                               ),
                               SizedBox(height: 16.h),
                               CustomForm(
@@ -207,20 +224,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   : Container(
                                       width: 270.w,
                                       height: 60.h,
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                          ),
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                            PrimaryColors.mainColor,
-                                          ),
-                                        ),
+                                      child: CustomButton(
+                                        text: 'Sign Up',
                                         onPressed: () async {
                                           bool isConnected =
                                               await checkInternetConnection();
@@ -264,17 +269,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 );
                                           }
                                         },
-                                        child: state is SignUpLoading
-                                            ? CircularProgressIndicator(
-                                                color: Colors.white,
-                                              )
-                                            : Text(
-                                                'Register',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
                                       ),
                                     ),
                             ],
